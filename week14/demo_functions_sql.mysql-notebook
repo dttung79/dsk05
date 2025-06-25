@@ -1,0 +1,2720 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\nSHOW DATABASES;\nuse demo_sql;\nSHOW TABLES;\nSELECT UPPER('hello world');\nSELECT LOWER('HELLO WORLD');\nSELECT LENGTH('HELLO WORLD');\nSELECT TRIM('    hello world    ');\nSELECT SUBSTRING('hello world' from 1 for 5);\nSELECT SUBSTRING('hello world' from 7 for 5);\nSELECT REPLACE('hello big big world', 'big', 'small');\nSELECT POSITION('o' IN 'Hello');\nSELECT REPLICATE('hello', 2);\nSELECT COALESCE(NULL, NULL, 'Hello', 'World');\nshow TABLES;\nDESCRIBE Employees;\nSELECT * FROM Employees;\n\n-- Lấy tên nhân viên và độ dài của tên\nSELECT NAME, LENGTH(Name)\nFROM Employees;\n-- Lấy tên nhân viên và tên viết hoa của Department\nSELECT Name, UPPER(Department)\nFROM Employees;\n-- Lấy tên nhân viên và tên viết hoa của Department chỉ 3 chữ cái đầu tiên\nSELECT Name, LEFT(Department, 3) AS DEP\nFROM Employees;\n-- Select nhân viên ở phòng Engineering nhưng đổi tên Engineering thành Technical\nSELECT Name, REPLACE(Department, 'Engineering', 'Technical') AS NEW_DEPT\nFROM Employees\nWHERE Department = 'Engineering';\n\nSELECT MIN(Salary)\nFROM Employees;\nSELECT Salary FROM Employees;\nSELECT Name, Salary\nFROM Employees\nWHERE Salary = (SELECT MIN(Salary) FROM Employees);\n-- Các nhân viên có lương cao nhất\nSELECT Name, Salary\nFROM Employees\nWHERE Salary = (SELECT MAX(Salary) FROM Employees);\n\nSELECT AVG(Salary) FROM Employees;\n-- Tính lương trung bình của các phòng ban\nselect department, avg(salary) as luongtb\nfrom employees\ngroup by department\nDESCRIBE Sales;\nSELECT * FROM Sales;\nuse abc;\nSELECT * FROM Sales;\n-- Tính tổng số lượng sp bán ra\nSELECT SUM(Quantity) FROM Sales;\n-- Tính tổng số lượng sp bán ra theo nhân viên\nSELECT Salesperson, SUM(Quantity) \nFROM Sales\nGROUP BY Salesperson;\n\n\n\n\n\n-- Tính tổng số lượng sp bán ra theo tháng\nSELECT \n    MONTH(SaleDate) AS Month,\n    SUM(Quantity) AS TotalQuantity\nFROM Sales\nGROUP BY MONTH(SaleDate);\n\nDESCRIBE Sales;\n-- Tìm sản phẩm bán chạy nhất\nselect product, sum(quantity) as tongsp\nfrom sales\ngroup by product\norder by tongsp desc\nlimit 1\nselect product, SUM(quantity) as total\nfrom sales\ngroup by product\nhaving sum(quantity) = (SELECT MAX(TOTAL_QUANTITY) FROM (SELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product) AS NEW_TABL);\n \nSELECT MAX(TOTAL_QUANTITY) FROM (SELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product) AS NEW_TABL;\nSELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product;\nDESCRIBE Sales;\nSELECT * FROM Sales;\nSELECT SUM(Total) AS SUM_TOTAL \nFROM Sales\nWHERE SaleDate BETWEEN '2024-01-15' AND '2024-01-25';\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 96,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 96,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 92,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 27
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Cmd+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "fa348a5c-9db7-4c2f-f03c-f0eac19788f2"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 15
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "fa348a5c-9db7-4c2f-f03c-f0eac19788f2",
+                    "rows": [
+                        {
+                            "0": "abc"
+                        },
+                        {
+                            "0": "demo_sql"
+                        },
+                        {
+                            "0": "information_schema"
+                        },
+                        {
+                            "0": "mysql"
+                        },
+                        {
+                            "0": "performance_schema"
+                        },
+                        {
+                            "0": "project1_db"
+                        },
+                        {
+                            "0": "sys"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Database",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 7 records retrieved in 0.855ms"
+                    },
+                    "totalRowCount": 7,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SHOW DATABASES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "f654bb1b-ace4-456c-8987-04be98543403",
+                            "content": "OK, 0 records retrieved in 0.367ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 13
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 4,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "8ae4f982-378b-402f-b7f2-f71a6a7a930e"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "8ae4f982-378b-402f-b7f2-f71a6a7a930e",
+                    "rows": [
+                        {
+                            "0": "Employees"
+                        },
+                        {
+                            "0": "penguins_simple"
+                        },
+                        {
+                            "0": "Sales"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Tables_in_demo_sql",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 1.446ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SHOW TABLES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 5,
+                "end": 5,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "4dd8540f-75f2-49d6-c8c7-9c600e5857fa"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 28
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "4dd8540f-75f2-49d6-c8c7-9c600e5857fa",
+                    "rows": [
+                        {
+                            "0": "HELLO WORLD"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "UPPER('hello world')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.766ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT UPPER('hello world')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 6,
+                "end": 6,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f956fa81-9173-4ba5-9ad7-f5cc93939636"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 28
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "f956fa81-9173-4ba5-9ad7-f5cc93939636",
+                    "rows": [
+                        {
+                            "0": "hello world"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "LOWER('HELLO WORLD')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.379ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT LOWER('HELLO WORLD')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 7,
+                "end": 7,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2df57e52-27e0-494e-cf4e-98b79f0ac738"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 29
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "2df57e52-27e0-494e-cf4e-98b79f0ac738",
+                    "rows": [
+                        {
+                            "0": 11
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "LENGTH('HELLO WORLD')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.331ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT LENGTH('HELLO WORLD')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 8,
+                "end": 8,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "46a29130-fe24-4b99-d5c3-57a1a699a37c"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 35
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "46a29130-fe24-4b99-d5c3-57a1a699a37c",
+                    "rows": [
+                        {
+                            "0": "hello world"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "TRIM('    hello world    ')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.796ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT TRIM('    hello world    ')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 9,
+                "end": 9,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "6c4086a3-e82f-4592-cdf0-22794b9d7f58"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 45
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "6c4086a3-e82f-4592-cdf0-22794b9d7f58",
+                    "rows": [
+                        {
+                            "0": "hello"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SUBSTRING('hello world' from 1 for 5)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.353ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT SUBSTRING('hello world' from 1 for 5)",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 10,
+                "end": 10,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "03370551-745f-4e05-a73e-5a6772721c64"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 45
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "03370551-745f-4e05-a73e-5a6772721c64",
+                    "rows": [
+                        {
+                            "0": "world"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SUBSTRING('hello world' from 7 for 5)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.347ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT SUBSTRING('hello world' from 7 for 5)",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 11,
+                "end": 11,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "da522c17-48e3-43a2-be8f-aa1e644e9d1a"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 54
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "da522c17-48e3-43a2-be8f-aa1e644e9d1a",
+                    "rows": [
+                        {
+                            "0": "hello small small world"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "REPLACE('hello big big world', 'big', 'small')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.37ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT REPLACE('hello big big world', 'big', 'small')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 12,
+                "end": 12,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "b224eaf1-8db6-44c0-a3b2-41c379d5cd3f"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 32
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "b224eaf1-8db6-44c0-a3b2-41c379d5cd3f",
+                    "rows": [
+                        {
+                            "0": 5
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "POSITION('o' IN 'Hello')",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.766ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT POSITION('o' IN 'Hello')",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 13,
+                "end": 13,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 0,
+                            "index": 0,
+                            "content": "MySQL Error (1305): FUNCTION demo_sql.REPLICATE does not exist",
+                            "language": "ansi"
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": ""
+                    }
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 29
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 14,
+                "end": 14,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 46
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 15,
+                "end": 15,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 16,
+                "end": 16,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 19
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 17,
+                "end": 18,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 24
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 24,
+                            "length": 1
+                        },
+                        "contentStart": 23,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 19,
+                "end": 21,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 80
+                        },
+                        "contentStart": 39,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 80,
+                            "length": 1
+                        },
+                        "contentStart": 79,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 22,
+                "end": 24,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 98
+                        },
+                        "contentStart": 52,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 98,
+                            "length": 1
+                        },
+                        "contentStart": 97,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 25,
+                "end": 27,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 130
+                        },
+                        "contentStart": 75,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 130,
+                            "length": 0
+                        },
+                        "contentStart": 129,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 28,
+                "end": 32,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 203
+                        },
+                        "contentStart": 82,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 203,
+                            "length": 1
+                        },
+                        "contentStart": 202,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 33,
+                "end": 34,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "8017f4d0-e5ff-4928-8752-209473e7e484"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 34
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 34,
+                            "length": 0
+                        },
+                        "contentStart": 33,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "8017f4d0-e5ff-4928-8752-209473e7e484",
+                    "rows": [
+                        {
+                            "0": "500.00"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "MIN(Salary)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.545ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT MIN(Salary)\nFROM Employees",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 35,
+                "end": 35,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "05b8ade4-419c-44b5-95b3-51a5cea4c9a1"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 29
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "05b8ade4-419c-44b5-95b3-51a5cea4c9a1",
+                    "rows": [
+                        {
+                            "0": "2485.28"
+                        },
+                        {
+                            "0": "1973.47"
+                        },
+                        {
+                            "0": "4000.00"
+                        },
+                        {
+                            "0": "2864.77"
+                        },
+                        {
+                            "0": "1637.13"
+                        },
+                        {
+                            "0": "1637.13"
+                        },
+                        {
+                            "0": "500.00"
+                        },
+                        {
+                            "0": "2120.62"
+                        },
+                        {
+                            "0": "1764.77"
+                        },
+                        {
+                            "0": "2225.88"
+                        },
+                        {
+                            "0": "500.00"
+                        },
+                        {
+                            "0": "1735.71"
+                        },
+                        {
+                            "0": "2686.59"
+                        },
+                        {
+                            "0": "2448.20"
+                        },
+                        {
+                            "0": "2093.17"
+                        },
+                        {
+                            "0": "2282.39"
+                        },
+                        {
+                            "0": "500.00"
+                        },
+                        {
+                            "0": "2214.47"
+                        },
+                        {
+                            "0": "1976.58"
+                        },
+                        {
+                            "0": "2182.92"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Salary",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 20 records retrieved in 0.442ms"
+                    },
+                    "totalRowCount": 20,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT Salary FROM Employees",
+                    "updatable": false,
+                    "fullTableName": "Employees"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 36,
+                "end": 38,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "376a2c9e-a3e0-40eb-9558-a97d465a341a"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 86
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "376a2c9e-a3e0-40eb-9558-a97d465a341a",
+                    "rows": [
+                        {
+                            "0": "Dustin Roberts",
+                            "1": "500.00"
+                        },
+                        {
+                            "0": "Amanda Kennedy",
+                            "1": "500.00"
+                        },
+                        {
+                            "0": "James Green",
+                            "1": "500.00"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Name",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Salary",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 0.443ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT Name, Salary\nFROM Employees\nWHERE Salary = (SELECT MIN(Salary) FROM Employees)",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 39,
+                "end": 43,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "550496eb-2633-4a5b-a2b3-16f2d77f4448"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 121
+                        },
+                        "contentStart": 35,
+                        "state": 3
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 121,
+                            "length": 1
+                        },
+                        "contentStart": 120,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "550496eb-2633-4a5b-a2b3-16f2d77f4448",
+                    "rows": [
+                        {
+                            "0": "Susan Walker",
+                            "1": "4000.00"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Name",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Salary",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.749ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Các nhân viên có lương cao nhất\nSELECT Name, Salary\nFROM Employees\nWHERE Salary = (SELECT MAX(Salary) FROM Employees);",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 44,
+                "end": 44,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2d721719-d6a2-4c74-ca77-5a7837e1efcd"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 34
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 34,
+                            "length": 0
+                        },
+                        "contentStart": 33,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "2d721719-d6a2-4c74-ca77-5a7837e1efcd",
+                    "rows": [
+                        {
+                            "0": "1991.454000"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "AVG(Salary)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.566ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT AVG(Salary) FROM Employees",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 45,
+                "end": 48,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "3ab312b0-2477-483f-fc55-e72f9b4ad765"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 121
+                        },
+                        "contentStart": 43,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "3ab312b0-2477-483f-fc55-e72f9b4ad765",
+                    "rows": [
+                        {
+                            "0": "HR",
+                            "1": "1805.228000"
+                        },
+                        {
+                            "0": "Marketing",
+                            "1": "2156.073333"
+                        },
+                        {
+                            "0": "Engineering",
+                            "1": "1985.166667"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "department",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "luongtb",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 1.464ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Tính lương trung bình của các phòng ban\nselect department, avg(salary) as luongtb\nfrom employees\ngroup by department",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 49,
+                "end": 49,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "d5179854-14c2-4c51-d76a-fda106b41329"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 15
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 15,
+                            "length": 0
+                        },
+                        "contentStart": 14,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "d5179854-14c2-4c51-d76a-fda106b41329",
+                    "rows": [
+                        {
+                            "0": "SaleID",
+                            "1": "int",
+                            "2": "NO",
+                            "3": "PRI",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "Product",
+                            "1": "varchar(50)",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "Salesperson",
+                            "1": "varchar(50)",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "SaleDate",
+                            "1": "date",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "Quantity",
+                            "1": "int",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "Price",
+                            "1": "decimal(10,2)",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        },
+                        {
+                            "0": "Total",
+                            "1": "decimal(10,2)",
+                            "2": "YES",
+                            "3": "",
+                            "4": null,
+                            "5": ""
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Field",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Type",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Null",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Key",
+                            "field": "3",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Default",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Extra",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 7 records retrieved in 1.327ms"
+                    },
+                    "totalRowCount": 7,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "DESCRIBE Sales",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 50,
+                "end": 50,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": []
+                },
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 20
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 20,
+                            "length": 0
+                        },
+                        "contentStart": 19,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 51,
+                "end": 52,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "9487e991-4ac6-4129-c401-26a6347d7ea7"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 8
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 8,
+                            "length": 21
+                        },
+                        "contentStart": 9,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "9487e991-4ac6-4129-c401-26a6347d7ea7",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "Laptop",
+                            "2": "Alice",
+                            "3": "2024-01-15",
+                            "4": 2,
+                            "5": "1000.00",
+                            "6": "2000.00"
+                        },
+                        {
+                            "0": 2,
+                            "1": "Laptop",
+                            "2": "Bob",
+                            "3": "2024-02-20",
+                            "4": 1,
+                            "5": "1000.00",
+                            "6": "1000.00"
+                        },
+                        {
+                            "0": 3,
+                            "1": "Monitor",
+                            "2": "Alice",
+                            "3": "2024-03-10",
+                            "4": 5,
+                            "5": "200.00",
+                            "6": "1000.00"
+                        },
+                        {
+                            "0": 4,
+                            "1": "Keyboard",
+                            "2": "Charlie",
+                            "3": "2024-01-25",
+                            "4": 10,
+                            "5": "50.00",
+                            "6": "500.00"
+                        },
+                        {
+                            "0": 5,
+                            "1": "Laptop",
+                            "2": "Alice",
+                            "3": "2024-02-05",
+                            "4": 3,
+                            "5": "1000.00",
+                            "6": "3000.00"
+                        },
+                        {
+                            "0": 6,
+                            "1": "Monitor",
+                            "2": "Bob",
+                            "3": "2024-03-20",
+                            "4": 2,
+                            "5": "200.00",
+                            "6": "400.00"
+                        },
+                        {
+                            "0": 7,
+                            "1": "Keyboard",
+                            "2": "Alice",
+                            "3": "2024-03-15",
+                            "4": 4,
+                            "5": "50.00",
+                            "6": "200.00"
+                        },
+                        {
+                            "0": 8,
+                            "1": "Mouse",
+                            "2": "Alice",
+                            "3": "2024-03-22",
+                            "4": 6,
+                            "5": "30.00",
+                            "6": "180.00"
+                        },
+                        {
+                            "0": 9,
+                            "1": "Laptop",
+                            "2": "Charlie",
+                            "3": "2024-02-28",
+                            "4": 2,
+                            "5": "950.00",
+                            "6": "1900.00"
+                        },
+                        {
+                            "0": 10,
+                            "1": "Monitor",
+                            "2": "Alice",
+                            "3": "2024-01-18",
+                            "4": 3,
+                            "5": "210.00",
+                            "6": "630.00"
+                        },
+                        {
+                            "0": 11,
+                            "1": "Mouse",
+                            "2": "Bob",
+                            "3": "2024-03-01",
+                            "4": 10,
+                            "5": "25.00",
+                            "6": "250.00"
+                        },
+                        {
+                            "0": 12,
+                            "1": "Keyboard",
+                            "2": "Charlie",
+                            "3": "2024-02-12",
+                            "4": 5,
+                            "5": "60.00",
+                            "6": "300.00"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SaleID",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "Product",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "Salesperson",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "SaleDate",
+                            "field": "3",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "Quantity",
+                            "field": "4",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "Price",
+                            "field": "5",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "Total",
+                            "field": "6",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 12 records retrieved in 1.76ms"
+                    },
+                    "totalRowCount": 12,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 1,
+                    "sql": "\nSELECT * FROM Sales",
+                    "updatable": true,
+                    "fullTableName": "Sales"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 53,
+                "end": 54,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "7d45992f-ea70-4271-c7f8-0e0f29875602"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 64
+                        },
+                        "contentStart": 32,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 64,
+                            "length": 1
+                        },
+                        "contentStart": 63,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "7d45992f-ea70-4271-c7f8-0e0f29875602",
+                    "rows": [
+                        {
+                            "0": "53"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SUM(Quantity)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.496ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Tính tổng số lượng sp bán ra\nSELECT SUM(Quantity) FROM Sales",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 55,
+                "end": 63,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 0.473ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> -- Tính tổng số lượng sp bán ra theo nhân viên\nSELECT Salesperson, SUM(Quantity) \nFROM Sales\nGROUP BY Salesperson LIMIT 0, 1001;\n+-------------+---------------+\n| Salesperson | SUM(Quantity) |\n+-------------+---------------+\n| Alice       |            23 |\n| Bob         |            13 |\n| Charlie     |            17 |\n+-------------+---------------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 114
+                        },
+                        "contentStart": 47,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 114,
+                            "length": 5
+                        },
+                        "contentStart": 113,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 64,
+                "end": 70,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "684b5edc-2ed0-4841-a282-2bf0ae587979"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 152
+                        },
+                        "contentStart": 43,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 152,
+                            "length": 1
+                        },
+                        "contentStart": 151,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "c6b606ba-9e62-42fd-e9a0-fe491cc4eea8",
+                    "resultId": "684b5edc-2ed0-4841-a282-2bf0ae587979",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "15"
+                        },
+                        {
+                            "0": 2,
+                            "1": "11"
+                        },
+                        {
+                            "0": 3,
+                            "1": "27"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Month",
+                            "field": "0",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "TotalQuantity",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 0.522ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Tính tổng số lượng sp bán ra theo tháng\nSELECT \n    MONTH(SaleDate) AS Month,\n    SUM(Quantity) AS TotalQuantity\nFROM Sales\nGROUP BY MONTH(SaleDate)",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 71,
+                "end": 71,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 7 records retrieved in 1.337ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> DESCRIBE Sales;\n+-------------+---------------+------+-----+---------+-------+\n| Field       | Type          | Null | Key | Default | Extra |\n+-------------+---------------+------+-----+---------+-------+\n| SaleID      | int           | NO   | PRI | null    |       |\n| Product     | varchar(50)   | YES  |     | null    |       |\n| Salesperson | varchar(50)   | YES  |     | null    |       |\n| SaleDate    | date          | YES  |     | null    |       |\n| Quantity    | int           | YES  |     | null    |       |\n| Price       | decimal(10,2) | YES  |     | null    |       |\n| Total       | decimal(10,2) | YES  |     | null    |       |\n+-------------+---------------+------+-----+---------+-------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 15
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 15,
+                            "length": 1
+                        },
+                        "contentStart": 14,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 72,
+                "end": 77,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.212ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> -- Tìm sản phẩm bán chạy nhất\nselect product, sum(quantity) as tongsp\nfrom sales\ngroup by product\norder by tongsp desc\nlimit 1;\n+----------+--------+\n| product  | tongsp |\n+----------+--------+\n| Keyboard |     19 |\n+----------+--------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 128
+                        },
+                        "contentStart": 30,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 78,
+                "end": 84,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.23ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> select product, SUM(quantity) as total\nfrom sales\ngroup by product\nhaving sum(quantity) = (SELECT MAX(TOTAL_QUANTITY) FROM (SELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product) AS NEW_TABL) LIMIT 0, 1001;\n+----------+-------+\n| product  | total |\n+----------+-------+\n| Keyboard |    19 |\n+----------+-------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 211
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 211,
+                            "length": 2
+                        },
+                        "contentStart": 210,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 85,
+                "end": 87,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.74ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> SELECT MAX(TOTAL_QUANTITY) FROM (SELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product) AS NEW_TABL LIMIT 0, 1001;\n+---------------------+\n| MAX(TOTAL_QUANTITY) |\n+---------------------+\n|                  19 |\n+---------------------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 119
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 88,
+                "end": 90,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 4 records retrieved in 0.458ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> SELECT Product, SUM(Quantity) TOTAL_QUANTITY\nFROM Sales\nGROUP BY Product LIMIT 0, 1001;\n+----------+----------------+\n| Product  | TOTAL_QUANTITY |\n+----------+----------------+\n| Laptop   |              8 |\n| Monitor  |             10 |\n| Keyboard |             19 |\n| Mouse    |             16 |\n+----------+----------------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 73
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 91,
+                "end": 91,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 7 records retrieved in 2.066ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> DESCRIBE Sales;\n+-------------+---------------+------+-----+---------+-------+\n| Field       | Type          | Null | Key | Default | Extra |\n+-------------+---------------+------+-----+---------+-------+\n| SaleID      | int           | NO   | PRI | null    |       |\n| Product     | varchar(50)   | YES  |     | null    |       |\n| Salesperson | varchar(50)   | YES  |     | null    |       |\n| SaleDate    | date          | YES  |     | null    |       |\n| Quantity    | int           | YES  |     | null    |       |\n| Price       | decimal(10,2) | YES  |     | null    |       |\n| Total       | decimal(10,2) | YES  |     | null    |       |\n+-------------+---------------+------+-----+---------+-------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 15
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 15,
+                            "length": 1
+                        },
+                        "contentStart": 14,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 92,
+                "end": 92,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 12 records retrieved in 0.43ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> SELECT * FROM Sales LIMIT 0, 1001;\n+--------+----------+-------------+------------+----------+---------+---------+\n| SaleID | Product  | Salesperson | SaleDate   | Quantity | Price   | Total   |\n+--------+----------+-------------+------------+----------+---------+---------+\n|      1 | Laptop   | Alice       | 2024-01-15 |        2 | 1000.00 | 2000.00 |\n|      2 | Laptop   | Bob         | 2024-02-20 |        1 | 1000.00 | 1000.00 |\n|      3 | Monitor  | Alice       | 2024-03-10 |        5 |  200.00 | 1000.00 |\n|      4 | Keyboard | Charlie     | 2024-01-25 |       10 |   50.00 |  500.00 |\n|      5 | Laptop   | Alice       | 2024-02-05 |        3 | 1000.00 | 3000.00 |\n|      6 | Monitor  | Bob         | 2024-03-20 |        2 |  200.00 |  400.00 |\n|      7 | Keyboard | Alice       | 2024-03-15 |        4 |   50.00 |  200.00 |\n|      8 | Mouse    | Alice       | 2024-03-22 |        6 |   30.00 |  180.00 |\n|      9 | Laptop   | Charlie     | 2024-02-28 |        2 |  950.00 | 1900.00 |\n|     10 | Monitor  | Alice       | 2024-01-18 |        3 |  210.00 |  630.00 |\n|     11 | Mouse    | Bob         | 2024-03-01 |       10 |   25.00 |  250.00 |\n|     12 | Keyboard | Charlie     | 2024-02-12 |        5 |   60.00 |  300.00 |\n+--------+----------+-------------+------------+----------+---------+---------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 20
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 93,
+                "end": 95,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.472ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> SELECT SUM(Total) AS SUM_TOTAL \nFROM Sales\nWHERE SaleDate BETWEEN '2024-01-15' AND '2024-01-25' LIMIT 0, 1001;\n+-----------+\n| SUM_TOTAL |\n+-----------+\n|   3130.00 |\n+-----------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 248,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 96
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 96,
+                            "length": 1
+                        },
+                        "contentStart": 95,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 96,
+                "end": 96,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
