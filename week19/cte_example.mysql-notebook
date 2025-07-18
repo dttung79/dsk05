@@ -1,0 +1,514 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\nuse abc;\nshow TABLES;\nWITH folder_size AS (\n    SELECT FolderID, SUM(SizeKB) AS TotalSize\n    FROM File\n    GROUP BY FolderID\n)\nSELECT \n    f.FolderName,\n    fs.TotalSize\nFROM folder_size AS fs\nJOIN Folder AS f\nON fs.FolderID = f.FolderID\nORDER BY fs.TotalSize\n\nSELECT * FROM File WHERE FolderID = 6;\n-- Liệt kê 5 file có kích thước lớn nhất và đánh số thứ tự (ROW_NUMBER)\nWITH RankedFile AS (    \n    SELECT \n        FileID,\n        FileName,\n        SizeKB,\n        ROW_NUMBER() OVER (ORDER BY SizeKB DESC) AS FileRank\n    FROM File\n    LIMIT 5\n)\nSELECT FileName, FileRank\nFROM RankedFile\n\n-- Tìm các files tạo ra trong năm 2022 (hiển thị cùng thư mục chứa)\nwith Tim_file as (\n    SELECT fileid, filename, createdDate\n    from file\n    where year(createddate) = '2022'\n)\nselect filename, createddate\nfrom tim_file\nwith file_year as (\n\tselect \n\t\tfolderID,\n        FileName,\n        year(CreatedDate) as year_created\n    from file\n)\nselect \n\tfy.FolderID,\n    fy.FileName,\n    fy.year_created,\n    f.folderName\nfrom file_year as fy\nleft join folder as f\non fy.folderID = f.folderid\nwhere fy.year_created = '2022';\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 48,
+                    "column": 17
+                },
+                "position": {
+                    "lineNumber": 48,
+                    "column": 17
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 39,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 57
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Cmd+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "da9b75e0-c17d-4865-b071-4dcd04ef045d",
+                            "content": "OK, 0 records retrieved in 0.32ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 8
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 8,
+                            "length": 1
+                        },
+                        "contentStart": 7,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "42566167-5bc3-49bf-f691-e4fb142eabe0"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "debfa4d9-3f3f-4996-b83d-f7a3d4a4ce3c",
+                    "resultId": "42566167-5bc3-49bf-f691-e4fb142eabe0",
+                    "rows": [
+                        {
+                            "0": "Course"
+                        },
+                        {
+                            "0": "educationlevel"
+                        },
+                        {
+                            "0": "employee"
+                        },
+                        {
+                            "0": "Employees"
+                        },
+                        {
+                            "0": "File"
+                        },
+                        {
+                            "0": "Folder"
+                        },
+                        {
+                            "0": "performancerating"
+                        },
+                        {
+                            "0": "Prerequisite"
+                        },
+                        {
+                            "0": "ratinglevel"
+                        },
+                        {
+                            "0": "Sales"
+                        },
+                        {
+                            "0": "satisfieldlevel"
+                        },
+                        {
+                            "0": "superstore"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Tables_in_abc",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 12 records retrieved in 2.203ms"
+                    },
+                    "totalRowCount": 12,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "show TABLES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 16,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 8 records retrieved in 1.396ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> WITH folder_size AS (\n    SELECT FolderID, SUM(SizeKB) AS TotalSize\n    FROM File\n    GROUP BY FolderID\n)\nSELECT \n    f.FolderName,\n    fs.TotalSize\nFROM folder_size AS fs\nJOIN Folder AS f\nON fs.FolderID = f.FolderID\nORDER BY fs.TotalSize;\n+------------+-----------+\n| FolderName | TotalSize |\n+------------+-----------+\n| Personal   |         1 |\n| root       |         2 |\n| Documents  |       120 |\n| Projects   |       512 |\n| Work       |      1006 |\n| Images     |      1024 |\n| Vacation   |      5120 |\n| Archive    |     10240 |\n+------------+-----------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 239
+                        },
+                        "contentStart": 0,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 17,
+                "end": 17,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f2fc13e1-e97c-4d0d-8a74-4ab4e8742ff7"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 38
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "debfa4d9-3f3f-4996-b83d-f7a3d4a4ce3c",
+                    "resultId": "f2fc13e1-e97c-4d0d-8a74-4ab4e8742ff7",
+                    "rows": [
+                        {
+                            "0": 5,
+                            "1": "vacation1.jpg",
+                            "2": 6,
+                            "3": 2048,
+                            "4": "2021-06-25"
+                        },
+                        {
+                            "0": 6,
+                            "1": "vacation2.png",
+                            "2": 6,
+                            "3": 3072,
+                            "4": "2021-06-26"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "FileID",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "FileName",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "FolderID",
+                            "field": "2",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "SizeKB",
+                            "field": "3",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "CreatedDate",
+                            "field": "4",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 0.432ms"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM File WHERE FolderID = 6",
+                    "updatable": true,
+                    "fullTableName": "File"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 18,
+                "end": 30,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 5 records retrieved in 0.627ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> -- Liệt kê 5 file có kích thước lớn nhất và đánh số thứ tự (ROW_NUMBER)\nWITH RankedFile AS (    \n    SELECT \n        FileID,\n        FileName,\n        SizeKB,\n        ROW_NUMBER() OVER (ORDER BY SizeKB DESC) AS FileRank\n    FROM File\n    LIMIT 5\n)\nSELECT FileName, FileRank\nFROM RankedFile;\n+---------------+----------+\n| FileName      | FileRank |\n+---------------+----------+\n| archive.zip   |        1 |\n| vacation2.png |        2 |\n| vacation1.jpg |        3 |\n| family.jpg    |        4 |\n| diagram.svg   |        5 |\n+---------------+----------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 293
+                        },
+                        "contentStart": 72,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 31,
+                "end": 38,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 2.682ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> -- Tìm các files tạo ra trong năm 2022 (hiển thị cùng thư mục chứa)\nwith Tim_file as (\n    SELECT fileid, filename, createdDate\n    from file\n    where year(createddate) = '2022'\n)\nselect filename, createddate\nfrom tim_file;\n+-------------+-------------+\n| filename    | createdDate |\n+-------------+-------------+\n| archive.zip | 2022-02-01  |\n| notes.txt   | 2022-05-10  |\n+-------------+-------------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 225
+                        },
+                        "contentStart": 68,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 39,
+                "end": 54,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 0.765ms"
+                    },
+                    "text": [
+                        {
+                            "type": 3,
+                            "content": "sql> with file_year as (\n\tselect \n\t\tfolderID,\n        FileName,\n        year(CreatedDate) as year_created\n    from file\n)\nselect \n\tfy.FolderID,\n    fy.FileName,\n    fy.year_created,\n    f.folderName\nfrom file_year as fy\nleft join folder as f\non fy.folderID = f.folderid\nwhere fy.year_created = '2022';\n+----------+-------------+--------------+------------+\n| folderID | FileName    | year_created | folderName |\n+----------+-------------+--------------+------------+\n|        8 | archive.zip |         2022 | Archive    |\n|        1 | notes.txt   |         2022 | root       |\n+----------+-------------+--------------+------------+\n"
+                        }
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 296
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 55,
+                "end": 55,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
