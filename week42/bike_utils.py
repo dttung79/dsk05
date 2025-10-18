@@ -14,6 +14,8 @@ from sklearn.metrics import mean_squared_error
 
 def load_data():
     st.header("Tải Dữ Liệu Thuê Xe Đạp")
+    day_data = None
+    hour_data = None
     day_col, hour_col = st.columns(2)
     with day_col:
         day_file = st.file_uploader("Tải lên tệp CSV cho dữ liệu hàng ngày", type=["csv"])
@@ -27,7 +29,8 @@ def load_data():
             st.success("Tệp dữ liệu hàng giờ đã được tải lên thành công!")
             hour_data = pd.read_csv(hour_file)
         
-    st.success("Dữ liệu đã được tải thành công!")
+    if day_data is not None and hour_data is not None:
+        st.success("Dữ liệu đã được tải thành công!")
 
     return day_data, hour_data
 
